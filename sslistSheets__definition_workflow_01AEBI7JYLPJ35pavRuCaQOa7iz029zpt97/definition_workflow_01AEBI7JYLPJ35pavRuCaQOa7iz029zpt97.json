@@ -1,0 +1,100 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01AEBI7JYLPJ35pavRuCaQOa7iz029zpt97",
+    "name": "SS - List Sheets",
+    "title": "SS - List Sheets",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "input",
+          "name": "Token",
+          "type": "datatype.secure_string",
+          "is_required": false
+        },
+        "unique_name": "variable_workflow_01AEBIODA7EVF6F5kufi60EABvnuqWFc9BN",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "atomic_group": "Smartsheet",
+        "is_atomic": true
+      },
+      "delete_workflow_instance": true,
+      "display_name": "SS - List Sheets",
+      "runtime_user": {
+        "override_target_runtime_user": false,
+        "specify_on_workflow_start": false,
+        "target_default": true
+      },
+      "target": {
+        "execute_on_target_group": false,
+        "execute_on_workflow_target": false,
+        "no_target": true,
+        "specify_on_workflow_start": false
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01AEBIV5BQ2543qrCaumMFLGMrPMG91nQ1d",
+        "name": "HTTP Request",
+        "title": "List Sheets Request",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "content_type": "application/json",
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "custom_headers": [
+            {
+              "name": "Authorization",
+              "value": "Bearer $workflow.definition_workflow_01AEBI7JYLPJ35pavRuCaQOa7iz029zpt97.input.variable_workflow_01AEBIODA7EVF6F5kufi60EABvnuqWFc9BN$"
+            }
+          ],
+          "display_name": "List Sheets Request",
+          "method": "GET",
+          "relative_url": "/sheets",
+          "runtime_user": {
+            "override_target_runtime_user": false,
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01ACB9ZD108X86rd3JzWlrsEXdFUfsAZeia"
+          }
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_1BMfMXSnJMyt5Ihqi7rWJr5N8cf"
+    ]
+  },
+  "targets": {
+    "definition_target_01ACB9ZD108X86rd3JzWlrsEXdFUfsAZeia": {
+      "unique_name": "definition_target_01ACB9ZD108X86rd3JzWlrsEXdFUfsAZeia",
+      "name": "Smartsheet",
+      "title": "Smartsheet",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "disable_certificate_validation": false,
+        "display_name": "Smartsheet",
+        "host": "api.smartsheet.com",
+        "no_runtime_user": true,
+        "path": "/2.0/",
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  }
+}
